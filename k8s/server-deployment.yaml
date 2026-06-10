@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: server-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       component: server
@@ -16,6 +16,10 @@ spec:
         - name: server
           image: joshuaeroca/multi-server
           command: ["node", "index.js"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
           ports:
             - containerPort: 5000
           env:
